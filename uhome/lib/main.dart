@@ -43,17 +43,29 @@ void main() {
         ),
         backgroundColor: Colors.blueGrey[800],
         appBar: AppBar(
-          title: Center(
-            child: Text('Welcome to uHome'),
-          ),
-          backgroundColor: Colors.blueGrey,
-        ),
-        body: Center(
-          child: Container(
-            constraints: BoxConstraints.expand(),
+          centerTitle: true,
+          title: Text('Welcome to uHome'),
+          flexibleSpace: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/kush.jpg'), fit: BoxFit.cover),
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.purple, Colors.indigoAccent]),
+            ),
+          ),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [0.3, 1],
+                colors: [Colors.purple, Colors.blueAccent]),
+          ),
+          child: Center(
+            child: Text(
+              'uHome',
+              style: TextStyle(fontSize: 30, color: Colors.white70),
             ),
           ),
         ),
