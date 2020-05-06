@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,11 +17,17 @@ class myapp extends StatelessWidget {
           title: Text('GeraltofRivea'),
         ),
         backgroundColor: Colors.white,
-        body: Container(
-          child: Center(
-            child: Text(
-              'The Witcher 3',
-              style: TextStyle(color: Colors.indigoAccent, fontSize: 28),
+        body: SafeArea(
+          child: Container(
+            height: 200.0,
+            width: 500.0,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                //containers can only have 1 child
+                'The Witcher 3',
+                style: TextStyle(color: Colors.indigoAccent, fontSize: 25),
+              ),
             ),
           ),
         ),
