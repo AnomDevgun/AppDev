@@ -8,40 +8,32 @@ void main() {
 class myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int _monsters;
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             children: <Widget>[
-              Container(
-                color: Colors.red,
-                //height: double.infinity,
-                width: 100,
+              CircleAvatar(
+                radius: 50.0,
+                backgroundImage: AssetImage('images/dow.png'),
               ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      color: Colors.yellow,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.green,
-                      height: 100,
-                      width: 100,
-                    ),
-                  ],
+              Text(
+                'Anom Devgun',
+                style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    fontSize: 30.0,
+                    color: Colors.white70,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'Student',
+                style: TextStyle(
+                  fontFamily: 'SansPro',
+                  fontSize: 25.0,
+                  color: Colors.black54,
+                  letterSpacing: 0.5,
                 ),
-              ),
-              Container(
-                color: Colors.blue,
-                //height: double.infinity,
-                width: 100,
               ),
             ],
           ),
