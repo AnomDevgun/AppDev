@@ -3,73 +3,77 @@ import 'package:flutter/material.dart';
 //use , after widget end parenthesis to allow flutter auto indent
 //The main function is the starting point for all apps
 void main() {
-  runApp(
-    MaterialApp(
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       home: Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                ),
-                child: Text(
-                  'This is Your Drawer',
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text('TestBuild'),
+          ),
+          drawer: Drawer(),
+          backgroundColor: Colors.blueAccent,
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Welcome to UHome',
                   style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 24,
+                      fontFamily: 'Pacifico',
+                      fontSize: 25.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 20.0,
+                  width: 150.0,
+                  child: Divider(
+                    color: Colors.deepPurpleAccent,
+                    thickness: 1.0,
                   ),
                 ),
-              ),
-              ListTile(
-                leading: Icon(Icons.message),
-                title: Text('Messages'),
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text('Profile'),
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-              ),
-              ListTile(
-                leading: Icon(Icons.camera_enhance),
-                title: Text('Camera'),
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Colors.blueGrey[800],
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Welcome to uHome'),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.purple, Colors.indigoAccent]),
+                Card(
+                  color: Colors.white70,
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.person_add,
+                      size: 30.0,
+                    ),
+                    title: Text(
+                      'New User',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'SansPro',
+                          color: Colors.deepPurple[500]),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Colors.white70,
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      size: 30.0,
+                    ),
+                    title: Text(
+                      'Existing User',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'SansPro',
+                          color: Colors.deepPurple[500]),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.3, 1],
-                colors: [Colors.purple, Colors.blueAccent]),
-          ),
-          child: Center(
-            child: Text(
-              'uHome',
-              style: TextStyle(fontSize: 30, color: Colors.white70),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
+          )),
+    );
+  }
 }
