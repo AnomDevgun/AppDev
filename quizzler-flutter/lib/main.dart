@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'questions.dart';
 
 void main() => runApp(Quizzler());
 
@@ -7,6 +8,18 @@ class Quizzler extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Quizzler'),
+          /*leading: GestureDetector(
+            onTap: () {
+              print('Gesture detected');
+            },
+            child: Icon(
+              Icons.menu, // add custom icons also
+            ),
+          ),*/
+        ),
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
@@ -25,15 +38,17 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  int count = 0;
+  int text = 0;
   void checkAnswer(bool ansType) {
-    if (answers[count] == ansType) {
+    if (questionList[count].questionAnswer == ansType) {
       scoreKeep.add(
         Icon(
           Icons.check,
           color: Colors.green,
         ),
       );
-    } else if (answers[count] != ansType) {
+    } else if (questionList[count].questionAnswer != ansType) {
       scoreKeep.add(
         Icon(
           Icons.close,
@@ -43,7 +58,14 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  int count = 0;
+  List<Questions> questionList = [
+    Questions(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Questions(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Questions(q: 'A slug\'s blood is green.', a: true),
+  ];
+
   List<Widget> scoreKeep = [
     Card(
       color: Colors.teal,
@@ -52,18 +74,6 @@ class _QuizPageState extends State<QuizPage> {
         style: TextStyle(fontSize: 17),
       ),
     ),
-  ];
-
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
-
-  List<bool> answers = [
-    false,
-    true,
-    true,
   ];
 
   @override
@@ -78,7 +88,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[count],
+                questionList[text].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -103,8 +113,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  checkAnswer(true);
-                  if (count < 2) {
+                  if (count < 3) {
+                    checkAnswer(true);
+                    if (text < 2) {
+                      text++;
+                    }
                     count++;
                   }
                 });
@@ -128,8 +141,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  checkAnswer(false);
-                  if (count < 2) {
+                  if (count < 3) {
+                    checkAnswer(false);
+                    if (text < 2) {
+                      text++;
+                    }
                     count++;
                   }
                 });
