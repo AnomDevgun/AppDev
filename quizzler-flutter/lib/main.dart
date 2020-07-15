@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'questions.dart';
 
@@ -155,8 +156,11 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ),
         //TODO: Add a Row here as your score keeper
-        Row(
-          children: scoreKeep,
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: scoreKeep,
+          ),
         )
       ],
     );
