@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'questions.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(Quizzler());
 
@@ -11,6 +12,7 @@ class Quizzler extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: Colors.teal,
           title: Text('Quizzler'),
           /*leading: GestureDetector(
             onTap: () {
@@ -21,7 +23,7 @@ class Quizzler extends StatelessWidget {
             ),
           ),*/
         ),
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.black54,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -38,11 +40,14 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
+AudioCache audioCache = new AudioCache();
+
 class _QuizPageState extends State<QuizPage> {
   int count = 0;
   int text = 0;
   void checkAnswer(bool ansType) {
     if (questionList[count].questionAnswer == ansType) {
+      audioCache.play('correct_choice.wav');
       scoreKeep.add(
         Icon(
           Icons.check,
@@ -50,6 +55,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
       );
     } else if (questionList[count].questionAnswer != ansType) {
+      audioCache.play('wrong_choice.mp3');
       scoreKeep.add(
         Icon(
           Icons.close,
@@ -69,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
 
   List<Widget> scoreKeep = [
     Card(
-      color: Colors.teal,
+      color: Colors.blueAccent.shade100,
       child: Text(
         'ScoreKeeper:',
         style: TextStyle(fontSize: 17),
@@ -121,9 +127,7 @@ class _QuizPageState extends State<QuizPage> {
                     }
                     count++;
                   }
-                });
-
-                //The user picked true.
+                }); //The user picked true.
               },
             ),
           ),
@@ -155,7 +159,6 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
