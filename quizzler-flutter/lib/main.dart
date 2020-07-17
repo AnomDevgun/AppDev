@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'questions.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'big_brain.dart';
+
+BigBrain quizBrain = BigBrain();
 
 void main() => runApp(Quizzler());
 
@@ -9,10 +11,16 @@ class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.info),
+              onPressed: () {
+                //textDialog(context);
+              }),
           centerTitle: true,
-          backgroundColor: Colors.teal,
+          backgroundColor: Color(0xFF673AB7),
           title: Text('Quizzler'),
           /*leading: GestureDetector(
             onTap: () {
@@ -23,7 +31,7 @@ class Quizzler extends StatelessWidget {
             ),
           ),*/
         ),
-        backgroundColor: Colors.black54,
+        backgroundColor: Color(0xFF512DA8),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -46,7 +54,7 @@ class _QuizPageState extends State<QuizPage> {
   int count = 0;
   int text = 0;
   void checkAnswer(bool ansType) {
-    if (questionList[count].questionAnswer == ansType) {
+    if (quizBrain.questionList[count].questionAnswer == ansType) {
       audioCache.play('correct_choice.wav');
       scoreKeep.add(
         Icon(
@@ -54,7 +62,7 @@ class _QuizPageState extends State<QuizPage> {
           color: Colors.green,
         ),
       );
-    } else if (questionList[count].questionAnswer != ansType) {
+    } else if (quizBrain.questionList[count].questionAnswer != ansType) {
       audioCache.play('wrong_choice.mp3');
       scoreKeep.add(
         Icon(
@@ -65,17 +73,9 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  List<Questions> questionList = [
-    Questions(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Questions(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Questions(q: 'A slug\'s blood is green.', a: true),
-  ];
-
   List<Widget> scoreKeep = [
     Card(
-      color: Colors.blueAccent.shade100,
+      color: Color(0xFF7C4DFF),
       child: Text(
         'ScoreKeeper:',
         style: TextStyle(fontSize: 17),
@@ -95,7 +95,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionList[text].questionText,
+                quizBrain.questionList[text].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -120,9 +120,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (count < 3) {
+                  if (count < 13) {
                     checkAnswer(true);
-                    if (text < 2) {
+                    if (text < 12) {
                       text++;
                     }
                     count++;
@@ -146,9 +146,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (count < 3) {
+                  if (count < 13) {
                     checkAnswer(false);
-                    if (text < 2) {
+                    if (text < 12) {
                       text++;
                     }
                     count++;
@@ -164,14 +164,12 @@ class _QuizPageState extends State<QuizPage> {
           child: Row(
             children: scoreKeep,
           ),
-        )
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 15,
+        ),
       ],
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
