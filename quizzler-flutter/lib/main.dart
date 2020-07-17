@@ -74,11 +74,14 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   List<Widget> scoreKeep = [
-    Card(
-      color: Color(0xFF7C4DFF),
-      child: Text(
-        'ScoreKeeper:',
-        style: TextStyle(fontSize: 17),
+    FittedBox(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'ScoreKeeper:',
+          style: TextStyle(
+              fontSize: 20, color: Colors.black87, fontStyle: FontStyle.italic),
+        ),
       ),
     ),
   ];
@@ -161,13 +164,16 @@ class _QuizPageState extends State<QuizPage> {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: scoreKeep,
+          child: Card(
+            color: Colors.purple.shade700,
+            child: Row(
+              children: scoreKeep,
+            ),
           ),
         ),
         SizedBox(
           width: double.infinity,
-          height: 15,
+          height: 20,
         ),
       ],
     );
