@@ -1,7 +1,10 @@
 import 'questions.dart';
 
 class BigBrain {
-  List<Questions> questionList = [
+  int _count = 0;
+  int _sound = 0;
+
+  List<Questions> _questionList = [
     Questions('Some cats are actually allergic to humans', true),
     Questions('You can lead a cow down stairs but not up stairs.', false),
     Questions(
@@ -29,4 +32,27 @@ class BigBrain {
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true),
   ];
+
+  void questNumber() {
+    if (_count < _questionList.length - 1) {
+      _count++;
+    }
+  }
+
+  String getQuestion() {
+    return _questionList[_count].questionText;
+  }
+
+  bool getAnswer() {
+    return _questionList[_count].questionAnswer;
+  }
+
+  bool checkStatus() {
+    if (_sound < _questionList.length) {
+      _sound++;
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

@@ -51,10 +51,9 @@ class QuizPage extends StatefulWidget {
 AudioCache audioCache = new AudioCache();
 
 class _QuizPageState extends State<QuizPage> {
-  int count = 0;
   int text = 0;
   void checkAnswer(bool ansType) {
-    if (quizBrain.questionList[count].questionAnswer == ansType) {
+    if (quizBrain.getAnswer() == ansType && quizBrain.checkStatus() == true) {
       audioCache.play('correct_choice.wav');
       scoreKeep.add(
         Icon(
@@ -62,7 +61,8 @@ class _QuizPageState extends State<QuizPage> {
           color: Colors.green,
         ),
       );
-    } else if (quizBrain.questionList[count].questionAnswer != ansType) {
+    } else if (quizBrain.getAnswer() != ansType &&
+        quizBrain.checkStatus() == true) {
       audioCache.play('wrong_choice.mp3');
       scoreKeep.add(
         Icon(
@@ -98,11 +98,12 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionList[text].questionText,
+                quizBrain.getQuestion(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   color: Colors.white,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
             ),
@@ -123,13 +124,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (count < 13) {
-                    checkAnswer(true);
-                    if (text < 12) {
-                      text++;
-                    }
-                    count++;
+                  checkAnswer(true);
+                  if (text < 12) {
+                    text++;
                   }
+                  quizBrain.questNumber();
                 }); //The user picked true.
               },
             ),
@@ -149,13 +148,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (count < 13) {
-                    checkAnswer(false);
-                    if (text < 12) {
-                      text++;
-                    }
-                    count++;
+                  checkAnswer(false);
+                  if (text < 12) {
+                    text++;
                   }
+                  quizBrain.questNumber();
                 });
                 //The user picked false.
               },
