@@ -79,7 +79,7 @@ class _QuizPageState extends State<QuizPage> {
       } else {
         Alert(
           context: context,
-          title: 'Finished!',
+          title: 'Over!',
           desc: 'You\'ve reached the end of the quiz.',
         ).show();
         quizBrain.reset();
