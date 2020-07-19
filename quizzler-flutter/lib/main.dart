@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'big_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 BigBrain quizBrain = BigBrain();
 
@@ -21,7 +22,7 @@ class Quizzler extends StatelessWidget {
               }),
           centerTitle: true,
           backgroundColor: Color(0xFF673AB7),
-          title: Text('Quizzler'),
+          title: Text('Kwizzler'),
           /*leading: GestureDetector(
             onTap: () {
               print('Gesture detected');
@@ -44,7 +45,7 @@ class Quizzler extends StatelessWidget {
 }
 
 class QuizPage extends StatefulWidget {
-  @override
+  @override //override like in c++ fn overriding
   _QuizPageState createState() => _QuizPageState();
 }
 
@@ -53,24 +54,51 @@ AudioCache audioCache = new AudioCache();
 class _QuizPageState extends State<QuizPage> {
   int text = 0;
   void checkAnswer(bool ansType) {
-    if (quizBrain.getAnswer() == ansType && quizBrain.checkStatus() == true) {
-      audioCache.play('correct_choice.wav');
-      scoreKeep.add(
-        Icon(
-          Icons.check,
-          color: Colors.green,
-        ),
-      );
-    } else if (quizBrain.getAnswer() != ansType &&
-        quizBrain.checkStatus() == true) {
-      audioCache.play('wrong_choice.mp3');
-      scoreKeep.add(
-        Icon(
-          Icons.close,
-          color: Colors.red,
-        ),
-      );
-    }
+    setState(() {
+      if (quizBrain.isFinished() == false) {
+        if (quizBrain.getAnswer() == ansType &&
+            quizBrain.isFinished() == false) {
+          audioCache.play('correct_choice.wav');
+          scoreKeep.add(
+            Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          );
+        } else if (quizBrain.getAnswer() != ansType &&
+            quizBrain.isFinished() == false) {
+          audioCache.play('wrong_choice.mp3');
+          scoreKeep.add(
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+          );
+        }
+        quizBrain.questNumber();
+      } else {
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+        quizBrain.reset();
+        scoreKeep = [
+          FittedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'ScoreKeeper:',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black87,
+                    fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+        ];
+      }
+    });
   }
 
   List<Widget> scoreKeep = [
@@ -123,13 +151,10 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  checkAnswer(true);
-                  if (text < 12) {
-                    text++;
-                  }
-                  quizBrain.questNumber();
-                }); //The user picked true.
+                checkAnswer(true);
+                if (text < 12) {
+                  text++;
+                }
               },
             ),
           ),
@@ -147,13 +172,11 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  checkAnswer(false);
-                  if (text < 12) {
-                    text++;
-                  }
-                  quizBrain.questNumber();
-                });
+                checkAnswer(false);
+                if (text < 12) {
+                  text++;
+                }
+
                 //The user picked false.
               },
             ),

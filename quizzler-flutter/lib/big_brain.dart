@@ -55,4 +55,15 @@ class BigBrain {
       return false;
     }
   }
+
+  bool isFinished() {
+    if (_count >= _questionList.length - 1) {
+      return true;
+    } else
+      return false;
+  }
+
+  void reset() {
+    _count = 0;
+  }
 }
