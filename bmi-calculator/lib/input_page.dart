@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 60.0;
+const buttonColors = Color(0xFF4db6ac);
+const bottomContainerColor = Color(0xFF880e4f);
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -13,12 +17,62 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
         title: Text('BMI CALCULATOR'),
       ),
-      body: Center(
-        child: Text(
-          'Body Text',
-          style: TextStyle(fontSize: 30),
-        ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(colour: buttonColors),
+                ),
+                Expanded(
+                  child: ReusableCard(colour: buttonColors),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ReusableCard(colour: buttonColors),
+          ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ReusableCard(colour: buttonColors),
+                ),
+                Expanded(
+                  child: ReusableCard(colour: buttonColors),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: bottomContainerColor,
+            margin: EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          ),
+        ],
       ),
     );
   }
 }
+
+class ReusableCard extends StatelessWidget {
+  final Color colour;
+
+  ReusableCard({@required this.colour});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: colour,
+      ),
+    );
+  }
+}
+
+// make color 26a69a on press

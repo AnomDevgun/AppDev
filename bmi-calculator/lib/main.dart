@@ -1,4 +1,5 @@
 //Can wrap individual widgets with theme widget and a child of data
+//const cant have access beyond runtime
 
 import 'package:flutter/material.dart';
 import 'input_page.dart';
