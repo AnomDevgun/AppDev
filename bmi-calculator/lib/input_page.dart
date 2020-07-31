@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_column.dart';
+import 'reusable_columnincard.dart';
 import 'reusable_card.dart';
+import 'constants.dart';
 
-const bottomContainerHeight = 60.0;
-const inactiveCardColor = Color(0xFF4db6ac);
-const bottomContainerColor = Color(0xFFad1457);
-//const bottomContainerColor = Color(0xFF1de9b6);
-const activeCardColor = Color(0xFF26a69a);
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,26 +15,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
-//1 for male, 2 for female
-  void updateColor(int gender) {
-    if (gender == 1) {
-      if (maleCardColor == inactiveCardColor) {
-        maleCardColor = activeCardColor;
-        femaleCardColor = inactiveCardColor;
-      } else {
-        maleCardColor = inactiveCardColor;
-      }
-    } else {
-      if (femaleCardColor == inactiveCardColor) {
-        femaleCardColor = activeCardColor;
-        maleCardColor = inactiveCardColor;
-      } else {
-        femaleCardColor = inactiveCardColor;
-      }
-    }
-  }
+  Gender genderSelected;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -44,39 +26,40 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
-                        updateColor(1);
+                        genderSelected = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: maleCardColor,
-                      cardChild: ResuableColumn(
-                        cardIcon: FontAwesomeIcons.mars,
-                        cardName: 'MALE',
-                      ),
+                    colour: genderSelected == Gender.male
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: ResuableColumn(
+                      cardIcon: FontAwesomeIcons.mars,
+                      cardName: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
-                        updateColor(2);
+                        genderSelected = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: femaleCardColor,
-                      cardChild: ResuableColumn(
-                        cardIcon: FontAwesomeIcons.venus,
-                        cardName: 'FEMALE',
-                      ),
+                    colour: genderSelected == Gender.female
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: ResuableColumn(
+                      cardIcon: FontAwesomeIcons.venus,
+                      cardName: 'FEMALE',
                     ),
                   ),
                 ),
@@ -84,25 +67,63 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: ReusableCard(colour: inactiveCardColor),
+            child: ReusableCard(
+              colour: kInactiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    activeColor: Color(0xFFc2185b),
+                    inactiveColor: Color(0xFF8D8E98),
+                    min: kMinHeight,
+                    max: kMaxHeight,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        height = newValue.toInt();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: inactiveCardColor),
+                  child: ReusableCard(colour: kInactiveCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(colour: inactiveCardColor),
+                  child: ReusableCard(colour: kInactiveCardColor),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
-            margin: EdgeInsets.only(top: 10),
+            color: kBottomContainerColor,
+            margin: EdgeInsets.only(top: 2),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),

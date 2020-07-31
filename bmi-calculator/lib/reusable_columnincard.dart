@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-const labelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFF757575),
-);
+import 'constants.dart';
 
 class ResuableColumn extends StatelessWidget {
   final IconData cardIcon;
@@ -28,7 +24,7 @@ class ResuableColumn extends StatelessWidget {
         ),
         Text(
           cardName,
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         ),
       ],
     );
