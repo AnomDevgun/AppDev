@@ -19,7 +19,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender genderSelected;
+  Gender genderSelected = Gender.male;
   Scale scaleSelected = Scale.metric;
   int height = 180;
 
@@ -86,7 +86,7 @@ class _InputPageState extends State<InputPage> {
                       scaleSelected = Scale.metric;
                     });
                   },
-                  cardChild: Text('METRIC(kg,cm)', style: kUnitTextStyle),
+                  cardChild: Text('(kg,cm)', style: kUnitTextStyle),
                 ),
                 ReusableCard(
                   onPress: () {
@@ -97,7 +97,7 @@ class _InputPageState extends State<InputPage> {
                   colour: scaleSelected == Scale.imperial
                       ? kActiveCardColor
                       : kInactiveCardColor,
-                  cardChild: Text('IMPERIAL(lbs,ft)', style: kUnitTextStyle),
+                  cardChild: Text('(lbs,inches)', style: kUnitTextStyle),
                 ),
               ],
             ),
