@@ -8,6 +8,10 @@ enum Gender {
   male,
   female,
 }
+enum Scale {
+  imperial,
+  metric,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,6 +20,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender genderSelected;
+  Scale scaleSelected = Scale.metric;
   int height = 180;
 
   @override
@@ -62,6 +67,37 @@ class _InputPageState extends State<InputPage> {
                       cardName: 'FEMALE',
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 50.0,
+            color: kInactiveCardColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ReusableCard(
+                  colour: scaleSelected == Scale.metric
+                      ? kActiveCardColor
+                      : kInactiveCardColor,
+                  onPress: () {
+                    setState(() {
+                      scaleSelected = Scale.metric;
+                    });
+                  },
+                  cardChild: Text('METRIC(kg,cm)', style: kUnitTextStyle),
+                ),
+                ReusableCard(
+                  onPress: () {
+                    setState(() {
+                      scaleSelected = Scale.imperial;
+                    });
+                  },
+                  colour: scaleSelected == Scale.imperial
+                      ? kActiveCardColor
+                      : kInactiveCardColor,
+                  cardChild: Text('IMPERIAL(lbs,ft)', style: kUnitTextStyle),
                 ),
               ],
             ),
