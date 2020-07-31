@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_columnincard.dart';
@@ -72,32 +73,37 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-            height: 50.0,
+
+            height: 47.0,
             color: kInactiveCardColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                ReusableCard(
-                  colour: scaleSelected == Scale.metric
-                      ? kActiveCardColor
-                      : kInactiveCardColor,
-                  onPress: () {
-                    setState(() {
-                      scaleSelected = Scale.metric;
-                    });
-                  },
-                  cardChild: Text('(kg,cm)', style: kUnitTextStyle),
+                Expanded(
+                  child: ReusableCard(
+                    colour: scaleSelected == Scale.metric
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    onPress: () {
+                      setState(() {
+                        scaleSelected = Scale.metric;
+                      });
+                    },
+                    cardChild: Text('(kg,cm)', style: kUnitTextStyle,textAlign: TextAlign.center,),
+                  ),
                 ),
-                ReusableCard(
-                  onPress: () {
-                    setState(() {
-                      scaleSelected = Scale.imperial;
-                    });
-                  },
-                  colour: scaleSelected == Scale.imperial
-                      ? kActiveCardColor
-                      : kInactiveCardColor,
-                  cardChild: Text('(lbs,inches)', style: kUnitTextStyle),
+                Expanded(
+                  child: ReusableCard(
+                    onPress: () {
+                      setState(() {
+                        scaleSelected = Scale.imperial;
+                      });
+                    },
+                    colour: scaleSelected == Scale.imperial
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: Text('(lbs,inches)', style: kUnitTextStyle,textAlign: TextAlign.center,),
+                  ),
                 ),
               ],
             ),
