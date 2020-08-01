@@ -22,7 +22,10 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender genderSelected = Gender.male;
   Scale scaleSelected = Scale.metric;
-  int height = 180;
+  static int heightMetric = 180;
+  static int heightImperial = 70;
+  int height = heightMetric;
+  String currentChoice = 'cm';
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +76,6 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Container(
-
             height: 47.0,
             color: kInactiveCardColor,
             child: Row(
@@ -87,9 +89,17 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         scaleSelected = Scale.metric;
+                        currentChoice = 'cm';
+                        height = heightMetric;
+                        kMinHeight = kMinHeightMetric;
+                        kMaxHeight = kMaxHeightMetric;
                       });
                     },
-                    cardChild: Text('(kg,cm)', style: kUnitTextStyle,textAlign: TextAlign.center,),
+                    cardChild: Text(
+                      '(kg,cm)',
+                      style: kUnitTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -97,12 +107,20 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         scaleSelected = Scale.imperial;
+                        currentChoice = 'inches';
+                        height = heightImperial;
+                        kMinHeight = kMinHeightImperial;
+                        kMaxHeight = kMaxHeightImperial;
                       });
                     },
                     colour: scaleSelected == Scale.imperial
                         ? kActiveCardColor
                         : kInactiveCardColor,
-                    cardChild: Text('(lbs,inches)', style: kUnitTextStyle,textAlign: TextAlign.center,),
+                    cardChild: Text(
+                      '(lbs,inches)',
+                      style: kUnitTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],
@@ -128,22 +146,29 @@ class _InputPageState extends State<InputPage> {
                         style: kNumberTextStyle,
                       ),
                       Text(
-                        'cm',
+                        currentChoice,
                         style: kLabelTextStyle,
                       ),
                     ],
                   ),
-                  Slider(
-                    value: height.toDouble(),
-                    activeColor: Color(0xFFc2185b),
-                    inactiveColor: Color(0xFF8D8E98),
-                    min: kMinHeight,
-                    max: kMaxHeight,
-                    onChanged: (double newValue) {
-                      setState(() {
-                        height = newValue.toInt();
-                      });
-                    },
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 13.0),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 25),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      activeColor: Color(0xFFc2185b),
+                      inactiveColor: Color(0xFF8D8E98),
+                      min: kMinHeight,
+                      max: kMaxHeight,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.toInt();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
