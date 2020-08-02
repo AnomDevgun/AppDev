@@ -25,3 +25,28 @@ const kUnitTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   fontSize: 19,
 );
+
+const kLargeButtonStyle = TextStyle(
+  fontSize: 23,
+  fontWeight: FontWeight.bold,
+);
+
+const kTitleTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 45.0,
+);
+
+const kResultTextStyle = TextStyle(
+  color: Color(0xFF7b1fa2),
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kBMITextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kBodyTextStyle = TextStyle(
+  fontSize: 20,
+);
