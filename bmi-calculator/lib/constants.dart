@@ -50,3 +50,14 @@ const kBMITextStyle = TextStyle(
 const kBodyTextStyle = TextStyle(
   fontSize: 20,
 );
+
+const kLandingPageStyle = TextStyle(
+  fontSize: 37.0,
+  fontWeight: FontWeight.w500,
+  color: Color(0xFF90caf9),
+  fontStyle: FontStyle.italic,
+);
+
+const kAppBarStyle = TextStyle(
+  color: Color(0xFF1565c0),
+);

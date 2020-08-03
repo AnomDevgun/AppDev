@@ -19,7 +19,10 @@ class ResultsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('BMI CALCULATOR'),
+        title: Text(
+          'Result',
+          style: kAppBarStyle,
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,7 +42,7 @@ class ResultsPage extends StatelessWidget {
           Expanded(
             flex: 5,
             child: ReusableCard(
-              colour: kActiveCardColor,
+              colour: Color(0xFF2196f3),
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
