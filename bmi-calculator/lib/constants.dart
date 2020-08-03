@@ -38,8 +38,8 @@ const kTitleTextStyle = TextStyle(
 
 const kResultTextStyle = TextStyle(
   color: Color(0xFF7b1fa2),
-  fontSize: 25.0,
-  fontWeight: FontWeight.bold,
+  fontSize: 30.0,
+  fontWeight: FontWeight.w900,
 );
 
 const kBMITextStyle = TextStyle(
@@ -52,7 +52,15 @@ const kBodyTextStyle = TextStyle(
 );
 
 const kLandingPageStyle = TextStyle(
+  shadows: <Shadow>[
+    Shadow(
+      offset: Offset(5.0, 7.0),
+      blurRadius: 2.0,
+      color: Color.fromARGB(70, 200, 20, 20),
+    ),
+  ],
   fontSize: 37.0,
+  color: Colors.white,
   fontWeight: FontWeight.w300,
   fontStyle: FontStyle.italic,
 );

@@ -52,7 +52,8 @@ class _InputPageState extends State<InputPage> {
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            colors: [Color(0xff1565c0), Color(0xff42a5f5)],
+            stops: [0.1,0.4,0.6,0.9],
+            colors: [Color(0xff1565c0), Color(0xff42a5f5),Color(0xFF2979ff),Color(0xFF3f51b5)],
           ),
         ),
         child: Column(
