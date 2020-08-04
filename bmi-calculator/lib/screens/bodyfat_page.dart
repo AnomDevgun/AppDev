@@ -339,51 +339,55 @@ class _BodyFatState extends State<BodyFat> {
                       ),
                     ],
                   ),
-                  ReusableCard(
-                    colour: kInactiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: <Widget>[
-                            Text(
-                              age.toString(),
-                              style: kNumberTextStyle,
-                            ),
-                            Text(
-                              'Y',
-                              style: kLabelTextStyle,
-                            ),
-                          ],
-                        ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 13.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 25),
+                  Expanded(
+                    child: ReusableCard(
+                      colour: kInactiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
                           ),
-                          child: Slider(
-                            value: age.toDouble(),
-                            activeColor: Color(0xFFc2185b),
-                            inactiveColor: Color(0xFF8D8E98),
-                            min: 2,
-                            max: 120,
-                            onChanged: (double newValue) {
-                              setState(() {
-                                age = newValue.toInt();
-                              });
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: <Widget>[
+                              Text(
+                                age.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              Text(
+                                'Y',
+                                style: kLabelTextStyle,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 13.0),
+                                overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 25),
+                              ),
+                              child: Slider(
+                                value: age.toDouble(),
+                                activeColor: Color(0xFFc2185b),
+                                inactiveColor: Color(0xFF8D8E98),
+                                min: 2,
+                                max: 120,
+                                onChanged: (double newValue) {
+                                  setState(() {
+                                    age = newValue.toInt();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

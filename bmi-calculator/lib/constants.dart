@@ -18,28 +18,28 @@ double kMinWeight = kMinWeightMetric;
 double kMaxWeight = kMaxWeightMetric;
 
 const kLabelTextStyle = TextStyle(
-  fontSize: 18.0,
+  fontSize: 14.0,
   color: Color(0xFF616161),
 );
 
 const kNumberTextStyle = TextStyle(
-  fontSize: 50.0,
+  fontSize: 35.0,
   fontWeight: FontWeight.w900,
 );
 
 const kUnitTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
-  fontSize: 19,
+  fontSize: 17,
 );
 
 const kLargeButtonStyle = TextStyle(
-  fontSize: 23,
+  fontSize: 21,
   fontWeight: FontWeight.bold,
 );
 
 const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 45.0,
+  fontSize: 42.0,
 );
 
 const kResultTextStyle = TextStyle(

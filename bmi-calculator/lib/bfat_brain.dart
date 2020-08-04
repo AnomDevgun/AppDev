@@ -13,6 +13,7 @@ class BFatBrain {
   final int waist;
   double _bFat;
 
+  // ignore: non_constant_identifier_names
   String Calculate() {
     if (unit == 1) {
       _bFat = 495 /
@@ -24,8 +25,10 @@ class BFatBrain {
     } else {
       _bFat = 495 /
               (1.29579 -
-                  0.35004 * logBase((waist + hip - neck), 10) +
-                  0.22100 * logBase(height, 10)) -
+                  0.35004 *
+                      logBase(
+                          ((waist * 2.54) + (hip * 2.54) - (neck * 2.54)), 10) +
+                  0.22100 * logBase((height * 2.54), 10)) -
           450;
       return _bFat.toStringAsFixed(1);
     }
