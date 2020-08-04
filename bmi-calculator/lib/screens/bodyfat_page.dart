@@ -364,19 +364,19 @@ class _BodyFatState extends State<BodyFat> {
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 13.0),
-                                overlayShape:
-                                    RoundSliderOverlayShape(overlayRadius: 25),
-                              ),
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 13.0),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 25),
+                            ),
+                            child: Flexible(
                               child: Slider(
                                 value: age.toDouble(),
                                 activeColor: Color(0xFFc2185b),
                                 inactiveColor: Color(0xFF8D8E98),
-                                min: 2,
+                                min: 5,
                                 max: 120,
                                 onChanged: (double newValue) {
                                   setState(() {
