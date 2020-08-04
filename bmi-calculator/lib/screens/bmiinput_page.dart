@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/reusable_columnincard.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import '../constants.dart';
-import 'results_page.dart';
+import 'bmiresults_page.dart';
 import '../components/bottom_button.dart';
 import 'package:bmi_calculator/components/roundIcon_button.dart';
 import 'package:bmi_calculator/calculator_brain.dart';
@@ -52,8 +52,13 @@ class _InputPageState extends State<InputPage> {
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            stops: [0.1,0.4,0.6,0.9],
-            colors: [Color(0xff1565c0), Color(0xff42a5f5),Color(0xFF2979ff),Color(0xFF3f51b5)],
+            stops: [0.1, 0.4, 0.6, 0.9],
+            colors: [
+              Color(0xff1565c0),
+              Color(0xff42a5f5),
+              Color(0xFF2979ff),
+              Color(0xFF3f51b5)
+            ],
           ),
         ),
         child: Column(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'screens/bmiinput_page.dart';
 import 'screens/landing_page.dart';
 import 'screens/bodyfat_page.dart';
+import 'package:bmi_calculator/screens/bodyfatresults_page.dart';
 
 void main() => runApp(BMICalculator());
 
@@ -24,6 +25,7 @@ class BMICalculator extends StatelessWidget {
         '/landingpage': (context) => LandingPage(),
         '/bmi': (context) => InputPage(),
         '/bodyfat': (context) => BodyFat(),
+        //'/bfatresult': (context) => BodyFatRes(),
       },
     );
   }

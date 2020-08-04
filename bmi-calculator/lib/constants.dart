@@ -8,8 +8,14 @@ const kMinHeightMetric = 120.0;
 const kMaxHeightMetric = 230.0;
 const kMinHeightImperial = 47.0;
 const kMaxHeightImperial = 90.0;
+const kMinWeightMetric = 60.0;
+const kMaxWeightMetric = 180.0;
+const kMinWeightImperial = 132.0;
+const kMaxWeightImperial = 396.0;
 double kMinHeight = kMinHeightMetric;
 double kMaxHeight = kMaxHeightMetric;
+double kMinWeight = kMinWeightMetric;
+double kMaxWeight = kMaxWeightMetric;
 
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
