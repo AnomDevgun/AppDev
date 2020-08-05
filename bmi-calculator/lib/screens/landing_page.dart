@@ -1,5 +1,8 @@
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:bmi_calculator/fade_route.dart';
+import 'bmiinput_page.dart';
+import 'bodyfat_page.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -45,7 +48,7 @@ class _LandingPageState extends State<LandingPage> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/bmi');
+                        Navigator.push(context, FadeRoute(page: InputPage()));
                       },
                       child: Text(
                         'Calculate Bmi:',
@@ -75,7 +78,7 @@ class _LandingPageState extends State<LandingPage> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/bodyfat');
+                        Navigator.push(context, FadeRoute(page: BodyFat()));
                       },
                       child: Text(
                         'Calculate Body Fat Percentage:',
