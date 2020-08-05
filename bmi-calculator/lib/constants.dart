@@ -4,20 +4,6 @@ const kBottomContainerHeight = 60.0;
 const kInactiveCardColor = Color(0xFF53B4DF);
 const kBottomContainerColor = Color(0xFFad1457);
 const kActiveCardColor = Color(0xFF1C9CD6);
-const kMinHeightMetric = 120.0;
-const kMaxHeightMetric = 230.0;
-const kMinHeightImperial = 47.0;
-const kMaxHeightImperial = 90.0;
-const kMinWeightMetric = 30.0;
-const kMaxWeightMetric = 180.0;
-const kMinWeightImperial = 132.0;
-const kMaxWeightImperial = 396.0;
-const kMinAge = 5.0;
-const kMaxAge = 100.0;
-double kMinHeight = kMinHeightMetric;
-double kMaxHeight = kMaxHeightMetric;
-double kMinWeight = kMinWeightMetric;
-double kMaxWeight = kMaxWeightMetric;
 
 const kLabelTextStyle = TextStyle(
   fontSize: 14.0,
@@ -25,7 +11,7 @@ const kLabelTextStyle = TextStyle(
 );
 
 const kNumberTextStyle = TextStyle(
-  fontSize: 40.0,
+  fontSize: 36.0,
   fontWeight: FontWeight.w900,
 );
 
@@ -67,10 +53,11 @@ const kLandingPageStyle = TextStyle(
       color: Color.fromARGB(70, 200, 20, 20),
     ),
   ],
-  fontSize: 37.0,
+  fontSize: 40.0,
   color: Colors.white,
-  fontWeight: FontWeight.w300,
-  fontStyle: FontStyle.italic,
+  //fontWeight: FontWeight.w300,
+  //fontStyle: FontStyle.italic,
+  fontFamily: 'Mulish-SemiBoldItalic',
 );
 
 const kAppBarStyle = TextStyle(fontWeight: FontWeight.w300);

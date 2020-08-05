@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.8.1
 
@@ -19,3 +20,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Mulish
+      fonts:
+        - asset:  fonts/Mulish-SemiBoldItalic.ttf

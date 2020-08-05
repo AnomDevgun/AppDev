@@ -33,15 +33,21 @@ class _BodyFatState extends State<BodyFat> {
   String currentUnitHeight = 'cm';
   String currentUnitWeight = 'kg';
   int height = 180;
-  int weight = 120;
+  int weight = 60;
   int age = 18;
   int currentUnit = 1;
   int currentWaist = 0, currentHip = 0, currentNeck = 0;
+  double kMinHeight = 106.0;
+  double kMaxHeight = 230.0;
+  double kMinAge = 5.0;
+  double kMaxAge = 100.0;
+  double kMinWeight = 30.0;
+  double kMaxWeight = 180.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -121,13 +127,14 @@ class _BodyFatState extends State<BodyFat> {
                           scalePicked = Scale.metric;
                           currentUnitHeight = 'cm';
                           height = 180;
-                          kMinHeight = kMinHeightMetric;
-                          kMaxHeight = kMaxHeightMetric;
-                          kMinWeight = kMinWeightMetric;
-                          kMaxWeight = kMaxWeightMetric;
+                          kMinHeight = 120.0;
+                          kMaxHeight = 230.0;
+                          kMinWeight = 30.0;
+                          kMaxWeight = 180.0;
                           currentUnitWeight = 'kg';
-                          weight = 120;
+                          weight = 60;
                           currentUnit = 1;
+                          age = 18;
                         });
                       },
                       cardChild: Text(
@@ -144,13 +151,14 @@ class _BodyFatState extends State<BodyFat> {
                           scalePicked = Scale.imperial;
                           currentUnitHeight = 'inches';
                           height = 70;
-                          kMinHeight = kMinHeightImperial;
-                          kMaxHeight = kMaxHeightImperial;
-                          kMinWeight = kMinWeightImperial;
-                          kMaxWeight = kMaxWeightImperial;
+                          kMinHeight = 47.0;
+                          kMaxHeight = 90.0;
+                          kMinWeight = 132.0;
+                          kMaxWeight = 396.0;
                           currentUnitWeight = 'lbs';
                           weight = 264;
                           currentUnit = 2;
+                          age = 18;
                         });
                       },
                       colour: scalePicked == Scale.imperial
@@ -176,22 +184,28 @@ class _BodyFatState extends State<BodyFat> {
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'HEIGHT',
-                            style: kLabelTextStyle,
+                          Flexible(
+                            child: Text(
+                              'HEIGHT',
+                              style: kLabelTextStyle,
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.alphabetic,
                             children: <Widget>[
-                              Text(
-                                height.toString(),
-                                style: kNumberTextStyle,
+                              Flexible(
+                                child: Text(
+                                  height.toString(),
+                                  style: kNumberTextStyle,
+                                ),
                               ),
-                              Text(
-                                currentUnitHeight,
-                                style: kLabelTextStyle,
+                              Flexible(
+                                child: Text(
+                                  currentUnitHeight,
+                                  style: kLabelTextStyle,
+                                ),
                               ),
                             ],
                           ),
@@ -225,22 +239,28 @@ class _BodyFatState extends State<BodyFat> {
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'WEIGHT',
-                            style: kLabelTextStyle,
+                          Flexible(
+                            child: Text(
+                              'WEIGHT',
+                              style: kLabelTextStyle,
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.alphabetic,
                             children: <Widget>[
-                              Text(
-                                weight.toString(),
-                                style: kNumberTextStyle,
+                              Flexible(
+                                child: Text(
+                                  weight.toString(),
+                                  style: kNumberTextStyle,
+                                ),
                               ),
-                              Text(
-                                currentUnitWeight,
-                                style: kLabelTextStyle,
+                              Flexible(
+                                child: Text(
+                                  currentUnitWeight,
+                                  style: kLabelTextStyle,
+                                ),
                               ),
                             ],
                           ),
@@ -345,22 +365,28 @@ class _BodyFatState extends State<BodyFat> {
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            'AGE',
-                            style: kLabelTextStyle,
+                          Flexible(
+                            child: Text(
+                              'AGE',
+                              style: kLabelTextStyle,
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.baseline,
                             textBaseline: TextBaseline.alphabetic,
                             children: <Widget>[
-                              Text(
-                                age.toString(),
-                                style: kNumberTextStyle,
+                              Flexible(
+                                child: Text(
+                                  age.toString(),
+                                  style: kNumberTextStyle,
+                                ),
                               ),
-                              Text(
-                                'Y',
-                                style: kLabelTextStyle,
+                              Flexible(
+                                child: Text(
+                                  'Y',
+                                  style: kLabelTextStyle,
+                                ),
                               ),
                             ],
                           ),
@@ -369,7 +395,7 @@ class _BodyFatState extends State<BodyFat> {
                               thumbShape: RoundSliderThumbShape(
                                   enabledThumbRadius: 13.0),
                               overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 25),
+                                  RoundSliderOverlayShape(overlayRadius: 20),
                             ),
                             child: Flexible(
                               child: Slider(
@@ -377,7 +403,7 @@ class _BodyFatState extends State<BodyFat> {
                                 activeColor: Color(0xFFc2185b),
                                 inactiveColor: Color(0xFF8D8E98),
                                 min: 5,
-                                max: 120,
+                                max: 100,
                                 onChanged: (double newValue) {
                                   setState(() {
                                     age = newValue.toInt();

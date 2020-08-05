@@ -36,6 +36,8 @@ class _InputPageState extends State<InputPage> {
   String currentChoiceOfUnits = 'cm';
   String currentChoiceOfWeight = 'kg';
   int currentUnit = 1;
+  double kMinHeight = 106.0;
+  double kMaxHeight = 230.0;
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +120,8 @@ class _InputPageState extends State<InputPage> {
                           scaleSelected = Scale.metric;
                           currentChoiceOfUnits = 'cm';
                           height = heightMetric;
-                          kMinHeight = kMinHeightMetric;
-                          kMaxHeight = kMaxHeightMetric;
+                          kMinHeight = 120;
+                          kMaxHeight = 230;
                           currentChoiceOfWeight = 'kg';
                           weight = weightMetric;
                           currentUnit = 1;
@@ -139,8 +141,8 @@ class _InputPageState extends State<InputPage> {
                           scaleSelected = Scale.imperial;
                           currentChoiceOfUnits = 'inches';
                           height = heightImperial;
-                          kMinHeight = kMinHeightImperial;
-                          kMaxHeight = kMaxHeightImperial;
+                          kMinHeight = 47;
+                          kMaxHeight = 90;
                           currentChoiceOfWeight = 'lbs';
                           weight = weightImperial;
                           currentUnit = 2;
