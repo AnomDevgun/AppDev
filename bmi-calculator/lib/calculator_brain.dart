@@ -30,11 +30,11 @@ class CalculatorBrain {
 
   String getInterpretation() {
     if (_bmi >= 25) {
-      return 'You have a higher than normal body weight. Try to exercise more';
+      return 'You have a higher than normal BMI. Try to exercise more';
     } else if (_bmi >= 18.5) {
-      return 'You have a normal body weight!';
+      return 'You have a normal BMI!';
     } else {
-      return 'You have a lower than normal body weight. You need to eat a bit more.';
+      return 'You have a lower than BMI. You need to eat a bit more.';
     }
   }
 }

@@ -191,7 +191,7 @@ class _LandingPageState extends State<LandingPage>
                                         context, FadeRoute(page: InputPage()));
                                   },
                                   child: Text(
-                                    'Calculate Bmi:',
+                                    'Calculate BMI:',
                                     textAlign: TextAlign.center,
                                     style: kLandingPageStyle,
                                   ),

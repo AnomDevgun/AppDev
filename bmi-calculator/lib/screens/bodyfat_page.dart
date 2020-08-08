@@ -8,6 +8,7 @@ import 'package:bmi_calculator/components/reusable_columnincard.dart';
 import 'package:flutter/services.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
 import 'package:bmi_calculator/bfat_brain.dart';
+import 'package:bmi_calculator/fade_route.dart';
 
 enum Gender {
   male,
@@ -435,10 +436,10 @@ class _BodyFatState extends State<BodyFat> {
                       unit: currentUnit);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => BodyFatRes(
-                                bodyFat: calc.Calculate(),
-                              )));
+                      FadeRoute(
+                          page: BodyFatRes(
+                        bodyFat: calc.Calculate(),
+                      )));
                 } else {
                   BFatBrain calc = BFatBrain(
                       height: height,
@@ -449,10 +450,10 @@ class _BodyFatState extends State<BodyFat> {
                       unit: currentUnit);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => BodyFatRes(
-                                bodyFat: calc.Calculate(),
-                              )));
+                      FadeRoute(
+                          page: BodyFatRes(
+                        bodyFat: calc.Calculate(),
+                      )));
                 }
               },
             ),
