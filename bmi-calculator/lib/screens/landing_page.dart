@@ -1,10 +1,12 @@
 import 'package:bmi_calculator/constants.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/fade_route.dart';
 import 'bmiinput_page.dart';
 import 'bodyfat_page.dart';
 import 'package:flutter/animation.dart';
 import 'dart:math';
+import 'package:flare_dart/actor.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -155,6 +157,13 @@ class _LandingPageState extends State<LandingPage>
             ),
             body: Stack(
               children: <Widget>[
+//                    Container(
+//                      child: FlareActor(
+//                        'assets/animation1.flr',
+//                        animation: 'idle',
+//                        fit: BoxFit.fill,
+//                      ),
+//                    ),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
