@@ -1,7 +1,12 @@
+import 'package:climate_plus/screens/location_screen.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:climate_plus/services/location.dart';
 import 'package:climate_plus/utilities/keys.dart';
 import 'package:climate_plus/services/networking.dart';
+import 'package:climate_plus/screens/location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flare_dart/actor.dart';
 
 double latitude;
 double longitude;
@@ -29,10 +34,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
     NetworkHelper networkHelper = NetworkHelper(
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
     var weatherData = await networkHelper.getData();
+//    Navigator.push(context, MaterialPageRoute(builder: (context) {
+//      return LocationScreen();
+//    }));
+    var now = new DateTime.now(); //gets current time
+    print(now.hour);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Container(
+      child: FlareActor(
+        'assets/Loading_White_Moon.flr',
+        fit: BoxFit.contain,
+        animation: 'Alarm',
+      ),
+    );
   }
 }
