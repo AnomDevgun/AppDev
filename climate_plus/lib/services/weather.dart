@@ -1,21 +1,43 @@
+import 'package:climate_plus/services/networking.dart';
+import 'package:climate_plus/services/location.dart';
+import 'package:climate_plus/utilities/keys.dart';
+
+const openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
 class WeatherModel {
+  Future<dynamic> cityWeather(String cityName) async {
+    var url =
+        '$openWeatherMapUrl?q=$cityName&appid=$OpenWeatherApiKey&units=metric';
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
+  Future<dynamic> getLocationWeather() async {
+    Location currentLocation = Location();
+    await currentLocation.getCurrentLocation();
+
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapUrl?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=$OpenWeatherApiKey&units=metric');
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
-      return '🌩';
+      return 'Thunderstorm';
     } else if (condition < 400) {
-      return '🌧';
+      return 'Drizzle';
     } else if (condition < 600) {
-      return '☔️';
+      return 'Rain';
     } else if (condition < 700) {
-      return '☃️';
+      return 'Snow';
     } else if (condition < 800) {
-      return '🌫';
+      return 'Mist/Haze/Smoke';
     } else if (condition == 800) {
-      return '☀️';
-    } else if (condition <= 804) {
-      return '☁️';
+      return 'Clear';
     } else {
-      return '🤷‍';
+      return 'Cloudy';
     }
   }
 

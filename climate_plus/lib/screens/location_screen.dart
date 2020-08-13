@@ -1,85 +1,182 @@
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:climate_plus/utilities/constants.dart';
+import 'package:climate_plus/services/weather.dart';
+import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
+  LocationScreen({this.locationWeather, this.currentTime});
+  final locationWeather;
+  final currentTime;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = new WeatherModel();
+  int temperature;
+  String weatherIcon;
+  String cityName;
+  String locationTemp;
+  String currentIn = 'in';
+  String flareTimeOfDay;
+  String rainType = 'inactive';
+  String rainDay = 'assets/Heavy rainy day.flr';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updateUI(
+        widget.locationWeather,
+        widget
+            .currentTime); //widget will tap into the statefulWidget so it can access data passed from loading screen
+  }
+
+  void updateUI(dynamic weatherData, dynamic curTime) {
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        cityName = '';
+        locationTemp = 'Unable to get weather data';
+        currentIn = '';
+        return;
+      }
+
+      var condition = weatherData['weather'][0]['id'];
+      rainType = 'inactive';
+      if (curTime > 6 && curTime < 17) {
+        flareTimeOfDay = 'day_idle';
+        if (condition < 600) {
+          rainType = 'go';
+          rainDay = 'assets/Heavy rainy day.flr';
+        }
+      } else {
+        flareTimeOfDay = 'night_idle';
+        if (condition < 600) {
+          rainType = 'go';
+          rainDay = 'assets/Heavy rainy Night.flr';
+        }
+      }
+
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      locationTemp = weather.getMessage(temperature);
+
+      weatherIcon = weather.getWeatherIcon(condition);
+      cityName = weatherData['name'];
+      currentIn = 'in';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('images/location_background.jpg'),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.white.withOpacity(0.8), BlendMode.dstATop),
+        body: Stack(
+          children: <Widget>[
+            Container(
+              child: FlareActor(
+                'assets/DayAndNight.flr',
+                animation: '$flareTimeOfDay',
+                fit: BoxFit.fitHeight,
+              ),
             ),
-          ),
-          constraints: BoxConstraints.expand(),
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Row(
+            Container(
+              constraints: BoxConstraints.expand(),
+              child: SafeArea(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    FlatButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.near_me,
-                        size: 50.0,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () async {
+                            var timeNow = new DateTime.now();
+                            var weatherData =
+                                await weather.getLocationWeather();
+                            updateUI(weatherData, timeNow.hour);
+                          },
+                          child: Icon(
+                            Icons.near_me,
+                            size: 40.0,
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: () async {
+                            var typedName = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return CityScreen();
+                                },
+                              ),
+                            );
+                            if (typedName != null) {
+                              var weatherData =
+                                  await weather.cityWeather(typedName);
+                              updateUI(weatherData, DateTime.now().hour);
+                            }
+                          },
+                          child: Icon(
+                            Icons.location_city,
+                            size: 40.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: <Widget>[
+                          Text(
+                            '$temperature°',
+                            style: kTempTextStyle,
+                          ),
+                          Flexible(
+                            child: Text(
+                              weatherIcon,
+                              style: kConditionTextStyle,
+                            ),
+                          ),
+                          Container(
+                            //FlareActor for rive animation of rain
+                            width: 80,
+                            height: 80,
+                            child: FlareActor(
+                              '$rainDay',
+                              animation: '$rainType',
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topRight,
+                              color: Colors.blueGrey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.location_city,
-                        size: 50.0,
-                      ),
-                    ),
+//                    Padding(
+//                      padding: EdgeInsets.only(right: 15.0),
+//                      child: Text(
+//                        '$locationTemp $currentIn  $cityName',
+//                        textAlign: TextAlign.right,
+//                        style: kMessageTextStyle,
+//                      ),
+//                    ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 15.0),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        '32°',
-                        style: kTempTextStyle,
-                      ),
-                      Text(
-                        '☀️',
-                        style: kConditionTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 15.0),
-                  child: Text(
-                    "It's 🍦 time in San Francisco!",
-                    textAlign: TextAlign.right,
-                    style: kMessageTextStyle,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 }
-
-//double temperature = weatherData['main']['temp'];
-//
-//int condition = weatherData['weather'][0]['id'];
-//
-//String cityName = weatherData['name'];
