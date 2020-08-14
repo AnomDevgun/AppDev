@@ -20,9 +20,9 @@ class _LocationScreenState extends State<LocationScreen> {
   String cityName;
   String locationTemp;
   String currentIn = 'in';
-  String flareTimeOfDay;
-  String rainType = 'inactive';
-  String rainDay = 'assets/Heavy rainy day.flr';
+  var flareTimeOfDay;
+  String rainType;
+  String rainDay = 'assets/Heavyrainyday.flr';
 
   @override
   void initState() {
@@ -47,17 +47,20 @@ class _LocationScreenState extends State<LocationScreen> {
 
       var condition = weatherData['weather'][0]['id'];
       rainType = 'inactive';
+      rainDay = 'inactive';
       if (curTime > 6 && curTime < 17) {
         flareTimeOfDay = 'day_idle';
         if (condition < 600) {
-          rainType = 'go';
-          rainDay = 'assets/Heavy rainy day.flr';
+          flareTimeOfDay = 'day_idle_rainy';
+          rainType = 'blank';
+          rainDay = 'assets/Heavyrainyday.flr';
         }
       } else {
         flareTimeOfDay = 'night_idle';
         if (condition < 600) {
+          flareTimeOfDay = 'night_idle_rainy';
           rainType = 'go';
-          rainDay = 'assets/Heavy rainy Night.flr';
+          rainDay = 'assets/HeavyrainyNight.flr';
         }
       }
 
@@ -80,7 +83,7 @@ class _LocationScreenState extends State<LocationScreen> {
           children: <Widget>[
             Container(
               child: FlareActor(
-                'assets/DayAndNight.flr',
+                'assets/daynight.flr',
                 animation: '$flareTimeOfDay',
                 fit: BoxFit.fitHeight,
               ),

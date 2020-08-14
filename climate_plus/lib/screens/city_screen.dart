@@ -1,6 +1,12 @@
+import 'dart:collection';
+
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:climate_plus/utilities/constants.dart';
+import 'package:climate_plus/services/weather.dart';
+import 'location_screen_differentCity.dart';
+import 'package:geocoder/geocoder.dart';
+import 'dart:convert';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -51,7 +57,27 @@ class _CityScreenState extends State<CityScreen> {
                   ),
                   FlatButton(
                     onPressed: () async {
-                      Navigator.pop(context, cityName);
+                      WeatherModel weather = WeatherModel();
+                      if (cityName != null) {
+                        var addresses = await Geocoder.local
+                            .findAddressesFromQuery(cityName);
+                        var first = addresses.first;
+                        var longTude = first.coordinates.longitude;
+                        var latTude = first.coordinates.latitude;
+                        var cityWea = await weather.cityName(latTude, longTude);
+                        var timeRN = cityWea['formatted'];
+                        String timeToPass = timeRN[11] + timeRN[12];
+                        int hourToPass = int.parse(timeToPass);
+                        print(timeToPass);
+                        var weatherData = await weather.cityWeather(cityName);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return LocationScreenDifferentCity(
+                            locationWeather: weatherData,
+                            currentTime: hourToPass,
+                          );
+                        }));
+                      }
                     },
                     child: Text(
                       'Get Weather',

@@ -3,6 +3,8 @@ import 'package:climate_plus/services/location.dart';
 import 'package:climate_plus/utilities/keys.dart';
 
 const openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const timeZoneUrl =
+    'http://api.timezonedb.com/v2.1/get-time-zone?key=YOUR_API_KEY&format=xml&by=position&lat=40.689247&lng=-74.044502';
 
 class WeatherModel {
   Future<dynamic> cityWeather(String cityName) async {
@@ -11,6 +13,14 @@ class WeatherModel {
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherData = await networkHelper.getData();
     return weatherData;
+  }
+
+  Future<dynamic> cityName(var lat, var long) async {
+    var url =
+        'http://api.timezonedb.com/v2.1/get-time-zone?key=$GeolocationApiKey&format=json&by=position&lat=$lat&lng=$long';
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var cityWeather = await networkHelper.getData();
+    return cityWeather;
   }
 
   Future<dynamic> getLocationWeather() async {
