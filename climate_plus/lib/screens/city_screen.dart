@@ -62,8 +62,9 @@ class _CityScreenState extends State<CityScreen> {
                         var addresses = await Geocoder.local
                             .findAddressesFromQuery(cityName);
                         var first = addresses.first;
-                        var longTude = first.coordinates.longitude;
-                        var latTude = first.coordinates.latitude;
+                        double longTude =
+                            first.coordinates.longitude.toDouble();
+                        double latTude = first.coordinates.latitude.toDouble();
                         var cityWea = await weather.cityName(latTude, longTude);
                         var timeRN = cityWea['formatted'];
                         String timeToPass = timeRN[11] + timeRN[12];

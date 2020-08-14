@@ -65,7 +65,7 @@ class _LocationScreenDifferentCityState
         }
       }
 
-      double temp = weatherData['main']['temp'];
+      var temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       locationTemp = weather.getMessage(temperature);
 
