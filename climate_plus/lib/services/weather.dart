@@ -62,4 +62,44 @@ class WeatherModel {
       return 'Bring a 🧥 just in case';
     }
   }
+
+  String getWeather(int condition, String time) {
+    if (time == 'day') {
+      if (condition < 600) {
+        return 'assets/Heavyrainyday.flr';
+      } else if (condition < 700) {
+        return 'assets/snowflakes.flr';
+      } else if (condition == 800) {
+        return 'assets/day.flr';
+      } else {
+        return 'assets/cloudy-day.flr';
+      }
+    } else {
+      if (condition < 600) {
+        return 'assets/HeavyrainyNight.flr';
+      } else if (condition < 700) {
+        return 'assets/snowflakes.flr';
+      } else if (condition == 800) {
+        return 'assets/night.flr';
+      } else {
+        return 'assets/cloudy-night.flr';
+      }
+    }
+  }
+
+  String getIfRainy(int condition, String time) {
+    if (condition < 600) {
+      if (time == 'day') {
+        return 'day_idle_rainy';
+      } else {
+        return 'night_idle_rainy';
+      }
+    } else {
+      if (time == 'day') {
+        return 'day_idle';
+      } else {
+        return 'night_idle';
+      }
+    }
+  }
 }

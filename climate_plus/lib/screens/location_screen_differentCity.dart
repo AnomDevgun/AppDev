@@ -47,22 +47,12 @@ class _LocationScreenDifferentCityState
       }
 
       var condition = weatherData['weather'][0]['id'];
-      rainType = 'inactive';
-      rainDay = 'inactive';
-      if (curTime > 6 && curTime < 17) {
-        flareTimeOfDay = 'day_idle';
-        if (condition < 600) {
-          flareTimeOfDay = 'day_idle_rainy';
-          rainType = 'blank';
-          rainDay = 'assets/Heavyrainyday.flr';
-        }
+      if (curTime > 5 && curTime < 19) {
+        flareTimeOfDay = weather.getIfRainy(condition, 'day');
+        rainDay = weather.getWeather(condition, 'day');
       } else {
-        flareTimeOfDay = 'night_idle';
-        if (condition < 600) {
-          flareTimeOfDay = 'night_idle_rainy';
-          rainType = 'go';
-          rainDay = 'assets/HeavyrainyNight.flr';
-        }
+        flareTimeOfDay = weather.getIfRainy(condition, 'night');
+        rainDay = weather.getWeather(condition, 'night');
       }
 
       var temp = weatherData['main']['temp'];
@@ -120,7 +110,6 @@ class _LocationScreenDifferentCityState
                             animation: '$rainType',
                             fit: BoxFit.fill,
                             alignment: Alignment.topRight,
-                            color: Colors.blueGrey,
                           ),
                         ),
                       ],
