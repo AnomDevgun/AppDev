@@ -1,6 +1,6 @@
 # Climate+<br />
 
-#A Climate information application<br /><br />
+# A Climate information application<br /><br />
 
 ## Features:<br /><br />
 ### >Dynamic Rive Animations implemented using FlareActors.<br />
