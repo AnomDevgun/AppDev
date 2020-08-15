@@ -1,3 +1,4 @@
+import 'package:climate_plus/screens/loading_screen.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,11 +90,11 @@ class _LocationScreenState extends State<LocationScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         FlatButton(
-                          onPressed: () async {
-                            var timeNow = new DateTime.now();
-                            var weatherData =
-                                await weather.getLocationWeather();
-                            updateUI(weatherData, timeNow.hour);
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoadingScreen()));
                           },
                           child: Icon(
                             Icons.near_me,

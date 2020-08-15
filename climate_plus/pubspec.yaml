@@ -28,6 +28,8 @@ dependencies:
   flare_flutter: ^2.0.6
   flutter_spinkit: ^3.1.0
   geocoder: ^0.2.1
+  retry: ^3.0.1
+
 
 dev_dependencies:
   flutter_test:
