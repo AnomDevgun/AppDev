@@ -1,16 +1,13 @@
-# climate_plus
+# Climate+<br />
 
-A Climate information application
+#A Climate information application<br /><br />
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features:<br /><br />
+### >Dynamic Rive Animations implemented using FlareActors.<br />
+### >openweathermap api used for fetching current location weather.<br />
+### >timezoneDB api used to find weather in other locations based on user input names of locations.<br />
+![Image of LoadingScreen](https://github.com/AnomDevgun/AppDev/blob/master/climate_plus/loading_screen.png)
+![Image of LandingPage](https://github.com/AnomDevgun/AppDev/blob/master/climate_plus/landing_page.png)
+![Image of LocationEntering1](https://github.com/AnomDevgun/AppDev/blob/master/climate_plus/enter_location.png)
+![Image of LocaionEntering2](https://github.com/AnomDevgun/AppDev/blob/master/climate_plus/enter_location2.png)
+![Image of SearchedLocation](https://github.com/AnomDevgun/AppDev/blob/master/climate_plus/searched_location.png)
