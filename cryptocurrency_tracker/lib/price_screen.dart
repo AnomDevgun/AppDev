@@ -10,19 +10,21 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text('Cryptocurrency Tracker'),
         centerTitle: true,
       ),
       body: Stack(
         children: <Widget>[
           FlareActor(
-            'assets/background.flr',
-            animation: 'Background loop',
+            'assets/Background_alt.flr',
+            animation: 'Blue',
             fit: BoxFit.fill,
           ),
-          Opacity(
-            opacity: 0.80,
+          Padding(
+            padding: const EdgeInsets.only(top: 100.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,7 +32,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
                   child: Card(
-                    color: Colors.lightBlueAccent,
+                    color: Color(0xff0092A2),
                     elevation: 5.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -49,12 +51,15 @@ class _PriceScreenState extends State<PriceScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 150.0,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(bottom: 30.0),
-                  color: Colors.lightBlue,
-                  child: null,
+                Opacity(
+                  opacity: 0.97,
+                  child: Container(
+                    height: 150.0,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(bottom: 30.0),
+                    color: Color(0xff0092A2),
+                    child: null,
+                  ),
                 ),
               ],
             ),
