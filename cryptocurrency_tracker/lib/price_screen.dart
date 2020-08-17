@@ -87,7 +87,10 @@ class _PriceScreenState extends State<PriceScreen> {
         CryptoCard(
           cryptoCurrency: crypto,
           selectedCurrency: selectedCurrency,
-          value: isWaiting ? '?' : coinValues[crypto],    //if iswaiting == true then set to '?' else lookup val in map and assign
+          value: isWaiting
+              ? '?'
+              : coinValues[
+                  crypto], //if iswaiting == true then set to '?' else lookup val in map and assign
         ),
       );
     }
