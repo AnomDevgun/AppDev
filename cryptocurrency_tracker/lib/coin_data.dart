@@ -1,3 +1,13 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:retry/retry.dart';
+import 'components/keys.dart';
+import 'dart:async';
+import 'dart:io';
+
+String apiRequestUrl =
+    'https://rest.coinapi.io/v1/exchangerate/BTC/USD?apikey=$coinApi';
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +38,26 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future networkHelper(String currentCurrency) async {
+    Map<String, String> cryptoPrices = {};
+    for (String crypt in cryptoList) {
+      String requestUrl =
+          'https://rest.coinapi.io/v1/exchangerate/$crypt/$currentCurrency?apikey=$coinApi';
+      http.Response apiResponse = await retry(
+        () => http.get(requestUrl).timeout(Duration(seconds: 2)),
+        retryIf: (e) => e is SocketException || e is TimeoutException,
+      );
+      if (apiResponse.statusCode == 200) {
+        String data = apiResponse.body;
+        var decodedData = jsonDecode(data);
+        double rate = (decodedData['rate']);
+        cryptoPrices[crypt] = rate.toStringAsFixed(0);
+      } else {
+        print(apiResponse.statusCode);
+        throw 'Problem with the api request';
+      }
+    }
+    return cryptoPrices;
+  }
+}

@@ -1,8 +1,10 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io' show Platform;
+import 'components/crypto_card.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -11,6 +13,24 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = currenciesList[0];
+  String currentExchange = '0';
+  CoinData coinData = CoinData();
+
+  Map<String, String> coinValues = {};
+  bool isWaiting = false;
+
+  void getData() async {
+    isWaiting = true;
+    try {
+      var data = await coinData.networkHelper(selectedCurrency);
+      isWaiting = false;
+      setState(() {
+        coinValues = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   DropdownButton<String> getDropDownButton() {
     List<DropdownMenuItem<String>> dropDownItems = [];
@@ -28,6 +48,7 @@ class _PriceScreenState extends State<PriceScreen> {
         onChanged: (value) {
           setState(() {
             selectedCurrency = value;
+            getData();
           });
         });
   }
@@ -42,7 +63,10 @@ class _PriceScreenState extends State<PriceScreen> {
       backgroundColor: Color(0xff0092A2),
       itemExtent: 32,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
+        setState(() {
+          selectedCurrency = currenciesList[selectedIndex];
+          getData();
+        });
       },
       children: populatedList,
     );
@@ -54,6 +78,30 @@ class _PriceScreenState extends State<PriceScreen> {
     } else {
       return getDropDownButton();
     }
+  }
+
+  Column makeCards() {
+    List<CryptoCard> cryptoCards = [];
+    for (String crypto in cryptoList) {
+      cryptoCards.add(
+        CryptoCard(
+          cryptoCurrency: crypto,
+          selectedCurrency: selectedCurrency,
+          value: isWaiting ? '?' : coinValues[crypto],    //if iswaiting == true then set to '?' else lookup val in map and assign
+        ),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: cryptoCards,
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
   }
 
   @override
@@ -80,25 +128,7 @@ class _PriceScreenState extends State<PriceScreen> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-                  child: Card(
-                    color: Color(0xff0092A2),
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 28.0),
-                      child: Text(
-                        '1 BTC = ? USD',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: makeCards(),
                 ),
                 Opacity(
                   opacity: 0.97,
