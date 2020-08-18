@@ -6,8 +6,6 @@ import 'components/keys.dart';
 import 'dart:async';
 import 'dart:io';
 
-String apiRequestUrl =
-    'https://rest.coinapi.io/v1/exchangerate/BTC/USD?apikey=$coinApi';
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -51,7 +49,7 @@ class CoinData {
       if (apiResponse.statusCode == 200) {
         String data = apiResponse.body;
         var decodedData = jsonDecode(data);
-        double rate = (decodedData['rate']);
+        var rate = (decodedData['rate']);
         cryptoPrices[crypt] = rate.toStringAsFixed(0);
       } else {
         print(apiResponse.statusCode);
