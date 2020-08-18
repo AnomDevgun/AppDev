@@ -1,7 +1,5 @@
 # iamrich
-
-A new Flutter application.
-
+## *Based on Armin Heinrich's application which was launched for $999.99, the highest price the appstore allowed and was an application that did absolutely nothing, enjoy.*
 ## Getting Started
 
 This project is a starting point for a Flutter application.
