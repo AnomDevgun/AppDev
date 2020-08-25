@@ -29,17 +29,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      child: Image.asset('images/logo.png'),
-                      height: 60.0,
+                    Hero(
+                      tag: 'logo',
+                      child: Container(
+                        child: Image.asset('images/log.png'),
+                        height: 120.0,
+                      ),
                     ),
-                    Text(
-                      'uChat',
-                      style: TextStyle(
-                          fontSize: 45.0,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white),
-                    ),
+//                    Text(
+//                      'uChat',
+//                      style: TextStyle(
+//                          fontSize: 45.0,
+//                          fontWeight: FontWeight.w900,
+//                          color: Colors.white),
+//                    ),
                   ],
                 ),
                 SizedBox(
