@@ -2,6 +2,8 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:uchat/screens/login_screen.dart';
 import 'package:uchat/screens/registration_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:uchat/components/PaddingButtons.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome';
@@ -52,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Hero(
@@ -62,55 +64,34 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         height: animation.value * 150,
                       ),
                     ),
-//                    Text(
-//                      'uChat',
-//                      style: TextStyle(
-//                          fontSize: 45.0,
-//                          fontWeight: FontWeight.w900,
-//                          color: Colors.white),
-//                    ),
+                    TypewriterAnimatedTextKit(
+                      text: ['uChat'],
+                      speed: Duration(seconds: 2),
+                      textStyle: TextStyle(
+                          fontSize: 45.0,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white54),
+                    ),
                   ],
                 ),
                 SizedBox(
                   height: 48.0,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
-                    elevation: 5.0,
-                    color: Colors.lightBlueAccent,
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
-                        //Go to login screen.
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: Text(
-                        'Log In',
-                      ),
-                    ),
-                  ),
+                PaddingWidget(
+                  colour: Colors.lightBlueAccent,
+                  title: 'Log In',
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                    //Go to login screen.
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(30.0),
-                    elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, RegistrationScreen.id);
-                        //Go to registration screen.
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: Text(
-                        'Register',
-                      ),
-                    ),
-                  ),
+                PaddingWidget(
+                  colour: Colors.blueAccent,
+                  title: 'Register',
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+                    //Go to login screen.
+                  },
                 ),
               ],
             ),
