@@ -1,9 +1,13 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:uchat/screens/loading.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
 import 'screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'screens/error.dart';
+import 'screens/loading.dart';
 
 void main() => runApp(FlashChat());
 
@@ -13,6 +17,9 @@ class FlashChat extends StatelessWidget {
     return FutureBuilder(
         future: Firebase.initializeApp(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return ErrorScreen();
+          }
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
@@ -27,9 +34,11 @@ class FlashChat extends StatelessWidget {
                 LoginScreen.id: (context) => LoginScreen(),
                 RegistrationScreen.id: (context) => RegistrationScreen(),
                 WelcomeScreen.id: (context) => WelcomeScreen(),
+                LoadingScreen.id: (context) => LoadingScreen(),
               },
             );
           }
+          return LoadingScreen();
         });
   }
 }
