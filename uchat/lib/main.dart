@@ -7,6 +7,7 @@ import 'screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/error.dart';
 import 'screens/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() => runApp(FlashChat());
 
