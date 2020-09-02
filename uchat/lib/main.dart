@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uchat/screens/choice.dart';
 import 'package:uchat/screens/loading.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
@@ -28,8 +29,9 @@ class FlashChat extends StatelessWidget {
                   bodyText1: TextStyle(color: Colors.black54),
                 ),
               ),
-              initialRoute: WelcomeScreen.id,
+              initialRoute: Choice.id,
               routes: {
+                Choice.id: (context) => Choice(),
                 ChatScreen.id: (context) => ChatScreen(),
                 LoginScreen.id: (context) => LoginScreen(),
                 RegistrationScreen.id: (context) => RegistrationScreen(),

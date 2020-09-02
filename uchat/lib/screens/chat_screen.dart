@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uchat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uchat/screens/welcome_screen.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
@@ -46,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: Icon(Icons.close),
               onPressed: () {
                 _auth.signOut();
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, WelcomeScreen.id);
               }),
         ],
         title: Text('u️Chat'),
@@ -78,6 +79,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
+                        'timestamp':
+                            DateTime.now().toUtc().millisecondsSinceEpoch,
                       });
                     },
                     child: Text(
@@ -99,7 +102,10 @@ class MessageStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore
+          .collection('messages')
+          .orderBy('timestamp', descending: true)
+          .snapshots(),
       // ignore: missing_return
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -109,7 +115,7 @@ class MessageStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data.docs.reversed;
+        final messages = snapshot.data.docs;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
           final messageText = message.data()['text'];
