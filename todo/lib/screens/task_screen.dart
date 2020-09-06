@@ -1,11 +1,18 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/widgets/tasks_list.dart';
+import 'package:todo/screens/add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTaskScreen());
+        },
+        elevation: 11.0,
         backgroundColor: Colors.lightBlue,
         child: Icon(Icons.add),
       ),
@@ -56,6 +63,7 @@ class TasksScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -63,6 +71,7 @@ class TasksScreen extends StatelessWidget {
                       topLeft: Radius.circular(30.0),
                     ),
                   ),
+                  child: TasksList(),
                 ),
               ),
             ],
