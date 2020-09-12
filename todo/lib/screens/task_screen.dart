@@ -2,8 +2,20 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/widgets/tasks_list.dart';
 import 'package:todo/screens/add_task_screen.dart';
+import 'package:todo/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy Milk'),
+    Task(name: 'Buy eggs'),
+    Task(name: 'Buy Eggs'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +28,12 @@ class TasksScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
+                child: AddTaskScreen((newTaskTitle) {
+                  setState(() {
+                    tasks.add(Task(name: newTaskTitle));
+                  });
+                  Navigator.pop(context);
+                }),
               ),
             ),
           );
@@ -61,7 +78,7 @@ class TasksScreen extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      'Tasks left X',
+                      'Tasks left ${tasks.length}',
                       style: TextStyle(color: Colors.white, fontSize: 15.0),
                     ),
                   ],
@@ -80,7 +97,7 @@ class TasksScreen extends StatelessWidget {
                       topLeft: Radius.circular(30.0),
                     ),
                   ),
-                  child: TasksList(),
+                  child: TasksList(tasks),
                 ),
               ),
             ],
