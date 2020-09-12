@@ -1,7 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  final Function addTaskCallback;
+  AddTaskScreen(this.addTaskCallback);
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String newTaskTitle;
+  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,12 +36,18 @@ class AddTaskScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0),
               child: TextField(
+                controller: controller,
+                onChanged: (newText) {
+                  newTaskTitle = newText;
+                },
                 textAlign: TextAlign.center,
                 autofocus: true,
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                widget.addTaskCallback(newTaskTitle);
+              },
               child: Text(
                 'Add',
                 style: TextStyle(color: Colors.white),
