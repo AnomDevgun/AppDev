@@ -39,14 +39,14 @@ class _TasksScreenState extends State<TasksScreen> {
           );
         },
         elevation: 11.0,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.deepPurpleAccent,
         child: Icon(Icons.add),
       ),
       body: Stack(
         children: [
           FlareActor(
-            'assets/BlueSplashScreen.flr',
-            animation: 'BackgroundLoop',
+            'assets/backg.flr',
+            animation: 'Flow',
             fit: BoxFit.fill,
           ),
           Column(
@@ -61,7 +61,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     CircleAvatar(
                       child: Icon(
                         Icons.list,
-                        color: Colors.lightBlue,
+                        color: Colors.deepPurple,
                         size: 40.0,
                       ),
                       radius: 30.0,
