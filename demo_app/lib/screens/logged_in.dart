@@ -1,36 +1,49 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_app/components/constants.dart';
+import 'package:demo_app/functions/database_helper.dart';
 
-class LoggedIn extends StatelessWidget {
+final dbHelper = DatabaseHelper.instance;
+var dat;
+var length = 0;
+
+class LoggedIn extends StatefulWidget {
+  @override
+  _LoggedInState createState() => _LoggedInState();
+}
+
+class _LoggedInState extends State<LoggedIn> {
+  int itemCount = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  getDb() async {
+    dat = await dbHelper.queryAllRows();
+    length = dat.length;
+    print(length);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          FlareActor(
-            'assets/Background Loop.flr',
-            animation: 'Background Loop',
-            fit: BoxFit.fill,
-          ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Successfully Logged In',
-                    style: kTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+    getDb();
+    return Container(
+      //backgroundColor: Colors.lightBlueAccent,
+      child: ListView.builder(
+          padding: const EdgeInsets.all(20),
+          itemCount: length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              color: Colors.lightBlue,
+              child: Text(
+                dat[index]['email'],
+                style: TextStyle(fontSize: 24.0),
+                textAlign: TextAlign.center,
               ),
-            ),
-          )
-        ],
-      ),
+            );
+          }),
     );
   }
 }

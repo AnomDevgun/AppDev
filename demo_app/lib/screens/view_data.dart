@@ -1,13 +1,26 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_app/components/constants.dart';
+import 'package:demo_app/functions/database_helper.dart';
+import 'package:demo_app/screens/logged_in.dart';
 
-class LandingPage extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _LandingPageState createState() => _LandingPageState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _LoginState extends State<Login> {
+  List<Map<String, dynamic>> dat;
+  int itemCount = 0;
+  final dbHelper = DatabaseHelper.instance;
+  void _print() async {
+    // print all data to console
+    dat = await dbHelper.queryAllRows();
+    print(dat);
+    print(dat[1]['email']);
+    print(dat.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,26 +47,27 @@ class _LandingPageState extends State<LandingPage> {
                     height: 30.0,
                   ),
                   FlatButton(
-                    color: Colors.lightBlueAccent,
-                    highlightColor: Colors.deepPurpleAccent,
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'registration');
-                    },
-                    child: Text('Register'),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0),
-                    ),
-                  ),
-                  FlatButton(
                     color: Colors.blueAccent,
                     onPressed: () {
-                      Navigator.pushNamed(context, 'login');
+                      setState(() {
+//                        _print();
+//                        itemCount = dat.length;
+                      });
+//                      Navigator.pushNamed(context, 'loggedin');
                     },
-                    child: Text('CheckDataInDb'),
+                    child: Text('Print Table in db'),
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                     ),
                   ),
+                  Container(
+                      height: 400.0,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.red[500],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: LoggedIn()),
                 ],
               ),
             ),
