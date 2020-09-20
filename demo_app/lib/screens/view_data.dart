@@ -4,12 +4,12 @@ import 'package:demo_app/components/constants.dart';
 import 'package:demo_app/functions/database_helper.dart';
 import 'package:demo_app/screens/logged_in.dart';
 
-class Login extends StatefulWidget {
+class View extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _ViewState createState() => _ViewState();
 }
 
-class _LoginState extends State<Login> {
+class _ViewState extends State<View> {
   List<Map<String, dynamic>> dat;
   int itemCount = 0;
   final dbHelper = DatabaseHelper.instance;
@@ -19,6 +19,12 @@ class _LoginState extends State<Login> {
     print(dat);
     print(dat[1]['email']);
     print(dat.length);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -55,7 +61,7 @@ class _LoginState extends State<Login> {
                       });
 //                      Navigator.pushNamed(context, 'loggedin');
                     },
-                    child: Text('Print Table in db'),
+                    child: Text('Print emails from table in db'),
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                     ),
@@ -64,7 +70,7 @@ class _LoginState extends State<Login> {
                       height: 400.0,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.red[500],
+                            color: Colors.blue,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(50))),
                       child: LoggedIn()),

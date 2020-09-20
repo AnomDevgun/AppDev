@@ -47,7 +47,9 @@ class _LandingPageState extends State<LandingPage> {
                   FlatButton(
                     color: Colors.blueAccent,
                     onPressed: () {
-                      Navigator.pushNamed(context, 'login');
+                      setState(() {
+                        Navigator.pushNamed(context, 'view');
+                      });
                     },
                     child: Text('CheckDataInDb'),
                     shape: new RoundedRectangleBorder(

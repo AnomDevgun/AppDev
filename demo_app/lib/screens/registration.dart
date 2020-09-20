@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_app/components/constants.dart';
 import 'package:demo_app/functions/database_helper.dart';
+import 'dart:async';
 
 class Registration extends StatefulWidget {
   @override
@@ -77,11 +78,36 @@ class _RegistrationState extends State<Registration> {
                     color: Colors.blueAccent,
                     onPressed: () async {
                       _insert(email, password);
-                      var daa = await dbHelper.queryAllRows();
-                      print(daa);
-                      //Navigator.pushNamed(context, 'login');
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40)),
+                              elevation: 16.0,
+                              child: Container(
+                                color: Colors.lightBlueAccent,
+                                height: 300.0,
+                                width: 200.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Data Successfully inserted in db, returning to homeScreen.',
+                                    style: TextStyle(
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.normal),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                      Timer(Duration(seconds: 3), () {
+                        // 5s over, navigate to a new page
+                        Navigator.pushReplacementNamed(context, 'landingpage');
+                      });
                     },
-                    child: Text('Login'),
+                    child: Text('Register'),
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                     ),

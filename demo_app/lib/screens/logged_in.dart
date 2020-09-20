@@ -29,21 +29,24 @@ class _LoggedInState extends State<LoggedIn> {
   @override
   Widget build(BuildContext context) {
     getDb();
-    return Container(
-      //backgroundColor: Colors.lightBlueAccent,
-      child: ListView.builder(
-          padding: const EdgeInsets.all(20),
-          itemCount: length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: Colors.lightBlue,
-              child: Text(
-                dat[index]['email'],
-                style: TextStyle(fontSize: 24.0),
-                textAlign: TextAlign.center,
-              ),
-            );
-          }),
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: Container(
+        //backgroundColor: Colors.lightBlueAccent,
+        child: ListView.builder(
+            padding: const EdgeInsets.all(20),
+            itemCount: length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                color: Colors.lightBlue,
+                child: Text(
+                  dat[index]['email'],
+                  style: TextStyle(fontSize: 24.0),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }),
+      ),
     );
   }
 }
