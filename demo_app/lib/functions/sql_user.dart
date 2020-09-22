@@ -1,4 +1,5 @@
 class SqlUser {
+  // ignore: non_constant_identifier_names
   int _user_id;
   String _email;
   String _password;

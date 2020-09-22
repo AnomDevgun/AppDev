@@ -5,13 +5,14 @@ import 'package:demo_app/components/constants.dart';
 import 'package:demo_app/functions/database_helper.dart';
 import 'dart:async';
 
+final dbHelper = DatabaseHelper.instance;
+
 class Registration extends StatefulWidget {
   @override
   _RegistrationState createState() => _RegistrationState();
 }
 
 class _RegistrationState extends State<Registration> {
-  final dbHelper = DatabaseHelper.instance;
   void _insert(String email, String password) async {
     // row to insert
     Map<String, dynamic> row = {
@@ -77,34 +78,73 @@ class _RegistrationState extends State<Registration> {
                   FlatButton(
                     color: Colors.blueAccent,
                     onPressed: () async {
-                      _insert(email, password);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Dialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40)),
-                              elevation: 16.0,
-                              child: Container(
-                                color: Colors.lightBlueAccent,
-                                height: 300.0,
-                                width: 200.0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Data Successfully inserted in db, returning to homeScreen.',
-                                    style: TextStyle(
-                                        fontSize: 30.0,
-                                        fontWeight: FontWeight.normal),
-                                    textAlign: TextAlign.center,
+                      int retValue = await dbHelper.getcount(email);
+                      print(retValue);
+                      if (retValue == 0) {
+                        _insert(email, password);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                elevation: 16.0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.lightBlueAccent,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15.0)),
+                                  ),
+                                  height: 300.0,
+                                  width: 200.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Data Successfully inserted in db, returning to homeScreen.',
+                                      style: TextStyle(
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          });
+                              );
+                            });
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                elevation: 16.0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.lightBlueAccent,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15.0)),
+                                  ),
+                                  height: 300.0,
+                                  width: 200.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Data Already exists in db, returning to homeScreen.',
+                                      style: TextStyle(
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      }
                       Timer(Duration(seconds: 3), () {
                         // 5s over, navigate to a new page
-                        Navigator.pushReplacementNamed(context, 'landingpage');
+                        Navigator.popUntil(
+                            context, ModalRoute.withName('landingpage'));
+                        // Navigator.pushReplacementNamed(context, 'landingpage');
                       });
                     },
                     child: Text('Register'),

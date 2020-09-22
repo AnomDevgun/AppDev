@@ -85,4 +85,17 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
+
+  Future<int> getcount(id) async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery(
+        'SELECT COUNT($columnName) FROM $table WHERE $columnName="$id"'));
+  }
 }
+
+//Future<int> getcount(id) async {
+//  var dbclient = await instance.database;
+//  int count = Sqflite.firstIntValue(await dbclient
+//      .rawQuery("SELECT COUNT(*) FROM $table WHERE $table.$columnName==$id"));
+//  return count;
+//}

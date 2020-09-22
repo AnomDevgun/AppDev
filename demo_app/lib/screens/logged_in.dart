@@ -1,6 +1,4 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:demo_app/components/constants.dart';
 import 'package:demo_app/functions/database_helper.dart';
 
 final dbHelper = DatabaseHelper.instance;
