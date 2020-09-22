@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:demo_app/components/constants.dart';
 import 'package:demo_app/functions/database_helper.dart';
 import 'dart:async';
+import 'package:giffy_dialog/giffy_dialog.dart';
 
 final dbHelper = DatabaseHelper.instance;
 
@@ -85,28 +86,16 @@ class _RegistrationState extends State<Registration> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40)),
-                                elevation: 16.0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.lightBlueAccent,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15.0)),
-                                  ),
-                                  height: 300.0,
-                                  width: 200.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Data Successfully inserted in db, returning to homeScreen.',
-                                      style: TextStyle(
-                                          fontSize: 30.0,
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                              return FlareGiffyDialog(
+                                flarePath: 'assets/Background Loop.flr',
+                                flareAnimation: 'Background Loop',
+                                title: Text('Success'),
+                                description: Text(
+                                  'Data Successfully inserted in db, returning to homeScreen.',
+                                  style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.normal),
+                                  textAlign: TextAlign.center,
                                 ),
                               );
                             });
@@ -114,28 +103,16 @@ class _RegistrationState extends State<Registration> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40)),
-                                elevation: 16.0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.lightBlueAccent,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15.0)),
-                                  ),
-                                  height: 300.0,
-                                  width: 200.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Data Already exists in db, returning to homeScreen.',
-                                      style: TextStyle(
-                                          fontSize: 30.0,
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                              return FlareGiffyDialog(
+                                flarePath: 'assets/Background Loop.flr',
+                                flareAnimation: 'Background Loop',
+                                title: Text('Failure'),
+                                description: Text(
+                                  'Data already exists in db, returning to homeScreen.',
+                                  style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.normal),
+                                  textAlign: TextAlign.center,
                                 ),
                               );
                             });
